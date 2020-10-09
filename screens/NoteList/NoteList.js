@@ -1,6 +1,10 @@
 import React, { useContext, useEffect } from 'react'
-import { View, Text, SafeAreaView, TouchableOpacity, Image, FlatList, Button, StatusBar } from 'react-native'
+import { View, SafeAreaView, FlatList } from 'react-native'
 import { MyContextApi } from '../../contextApi/parentContext'
+
+import Item1 from './components/item1'
+import Item2 from './components/item2'
+import BackButton from './components/backButton'
 
 
 export default function NoteList({ navigation }) {
@@ -21,48 +25,8 @@ export default function NoteList({ navigation }) {
             null
     }, [selectedIdDelete])
 
-    const Item1 = ({ item, onPress, style }) => (
-        item.display
-            ?
-            <View>
-                <TouchableOpacity activeOpacity onPress={onPress} style={[{ padding: 10, marginVertical: 8, marginHorizontal: 16 }, style]}>
 
-                    <Text style={{ fontSize: 17, letterSpacing: 0.5, color: '#222' }}>{
-                        item.id !== selectedId
-                            ?
-                            item.content.slice(0, 200)
-                            :
-                            item.content
-                    }..</Text>
-
-                </TouchableOpacity>
-            </View >
-            :
-            null
-
-    );
-
-    const Item2 = ({ item, onPress, style }) => (
-        item.display
-            ?
-            <View style={{ width: '100%', flexDirection: 'row', alignItems: 'flex-start', justifyContent: 'space-between' }}>
-                <Text style={{ marginLeft: 25, marginTop: 8, color: '#333', fontSize: 14 }}>{item.date}</Text>
-                <TouchableOpacity
-                    style={{ marginRight: 20, marginBottom: 20 }}
-                    onPress={onPress}
-                >
-                    <Image
-                        style={{ width: 30, height: 30 }}
-                        source={require('../../assets/delete1.png')}
-                    />
-                </TouchableOpacity>
-            </View>
-
-            :
-            null
-    )
-
-    const renderItem = ({ item }) => {
+    function renderItem({ item }) {
         const backgroundColor = item.id === selectedId ? "#f7e7ce" : "#BFD7ED";
 
         return (
@@ -87,19 +51,7 @@ export default function NoteList({ navigation }) {
         <View style={{ width: '100%', height: '100%', backgroundColor: '#0074B7' }}>
             <SafeAreaView>
 
-                <View style={{ width: '100%', height: 50, flexDirection: 'row' }}>
-                    <View style={{ width: '50%', height: 40, alignItems: 'flex-start', justifyContent: 'flex-start', }}>
-                        <TouchableOpacity
-                            style={{ marginLeft: 10 }}
-                            onPress={function () { navigation.openDrawer() }}
-                        >
-                            <Image
-                                style={{ width: 40, height: 40 }}
-                                source={require('../../assets/back.png')}
-                            />
-                        </TouchableOpacity>
-                    </View>
-                </View>
+                <BackButton navigation={navigation} />
 
 
                 <View style={{ width: '100%', height: '100%', flexDirection: 'row', paddingBottom: 100 }}>

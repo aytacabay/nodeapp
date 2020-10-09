@@ -1,7 +1,7 @@
 import React from 'react'
 import { SafeAreaView, Text } from 'react-native'
 
-import TextInputFunc from './TextInput'
+import TextInputFunc from './components/TextInput'
 
 const Home = ({ navigation }) => {
 
